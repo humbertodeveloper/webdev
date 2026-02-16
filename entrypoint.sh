@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-php /var/www/html/wdsapp/composer.phar install --no-interaction
+composer install --no-interaction
 
 # Configurações do Xdebug
 cat <<EOF > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini

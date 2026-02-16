@@ -1,0 +1,47 @@
+services:
+  # Seu container PHP + Apache com Xdebug
+  php-apache:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "80:80"
+      - "9003:9003"
+    volumes:
+      - ./wdsapp:/var/www/html/wdsapp
+      - ./:/var/www/html
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # Banco de Dados MariaDB
+  db:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devsec_wdsapp_db
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  # Interface Visual para o Banco de Dados
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - MYSQL_ROOT_PASSWORD=root
+      - PMA_ABSOLUTE_URI=http://localhost:8080/
+      - SESSION_SAVE_PATH=/tmp
+    depends_on:
+      - db
+
+volumes:
+  db_data:

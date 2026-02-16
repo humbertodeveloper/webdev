@@ -80,8 +80,7 @@ class functions extends connect{
             ":password" => $password
         ];
 
-        $query = $conn->query("SELECT * FROM clients where email = :user and password = :password",
-            array($user, $password));
+        $query = $conn->query("SELECT * FROM clients where email = :user and password = :password", $array_data);
 
 		$result = $conn->fetch_array($query);
 

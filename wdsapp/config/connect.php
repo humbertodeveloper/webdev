@@ -12,6 +12,11 @@ class connect extends config{
 	
 	function query($sql, $params = null){
 		$stmt = $this->pdo->prepare($sql);
+        if ($params) {
+            foreach ($params as $key => $value) {
+                $stmt->bindValue($key, $value);
+            }
+        }
 		$run = $stmt->execute();
 		return $stmt;
 	}

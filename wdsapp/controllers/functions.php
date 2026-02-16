@@ -68,7 +68,7 @@ class functions extends connect{
             ":user" => $user,
             ":password" => $password
         ];
-        $query = $conn->query("SELECT * FROM clients where email = :user and password = :password", array($user, $password));
+        $query = $conn->query("SELECT * FROM users where email = :user and senha = :password", array($user, $password));
 
 		$result = $conn->fetch_array($query);
 		
@@ -79,7 +79,11 @@ class functions extends connect{
 	function clientAuth($user, $password){
 
 		$conn = new connect();
-        $sql = "SELECT * FROM clients where email = '".$user."' and password = '".$password."'";
+        $array_data = [
+            ":user" => $user,
+            ":password" => $password
+        ];
+        $query = $conn->query("SELECT * FROM clients where email = :user and password = :password", array($user, $password));
 
 		$query = $conn->query($sql);
 		$result = $conn->fetch_array($query);

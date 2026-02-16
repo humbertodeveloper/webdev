@@ -9,8 +9,8 @@ $functions = new functions();
 $user = $_POST["user"];
 $password = $_POST["senha"];
 
-$user = preg_replace('/[^A-Za-z0-9@_\.ˆ]/', '', $user);
-$password = preg_replace('/[^A-Za-z0-9\-!@#$%ˆ]/', '', $password);
+//$user = preg_replace('/[^A-Za-z0-9@_\.ˆ]/', '', $user);
+//$password = preg_replace('/[^A-Za-z0-9\-!@#$%ˆ]/', '', $password);
 
 $session->setSession('client_WDSApp_session', $user);
 

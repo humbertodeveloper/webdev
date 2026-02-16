@@ -11,15 +11,10 @@ class connect extends config{
 
 	
 	function query($sql, $params = null){
-        $stmt = $this->pdo->prepare($sql);
-        if($params){
-            foreach ($params as $key => $value){
-                $stmt->bindValue($key, $value);
-            }
-        }
-        $run = $stmt->execute();
-        return $stmt;
-    }
+		$stmt = $this->pdo->prepare($sql);
+		$run = $stmt->execute();
+		return $stmt;
+	}
 	
 	function fetch_array($stmt){ 
 		$rs = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -35,13 +35,14 @@ if($rsUser["password"]){
 	$password = hash('sha256',$password);
 	$newPassword = 1;
 }
-
-$salt = time();
 $token = $email.$password;
 $token = hash('sha256',$token);
 
-$qryUpdate = "UPDATE clients SET password = '".$password."', temporary_salt = '".$salt."' WHERE id = ".$id;
-$rsExec = $model->model_exec($qryUpdate);
+if($newPassword){
+
+	$qryUpdate = "UPDATE clients SET password = '".$password."' WHERE id = ".$id;
+	$rsExec = $model->model_exec($qryUpdate);
+}	
 
 $urlToken = _HOST_.'acesso/token/'.$token;
 

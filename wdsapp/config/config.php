@@ -1,6 +1,5 @@
 <?php
-class config
-{
+class config{
 	var $host = 'db';
 	var $user = 'root';
 	var $pass = 'root';

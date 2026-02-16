@@ -63,13 +63,8 @@ class functions extends connect{
 	function authUser($user, $password){
 	
 		$conn = new connect();
-
-		$array_data = [
-            ":user" => $user,
-            ":password" => $password
-        ];
-        $query = $conn->query("SELECT * FROM users where email = :user and senha = :password", array($user, $password));
-
+		
+		$query = $conn->query("SELECT * FROM users where email = '".$user."' and senha = '".$password."'");
 		$result = $conn->fetch_array($query);
 		
 		return $result;
@@ -79,13 +74,15 @@ class functions extends connect{
 	function clientAuth($user, $password){
 
 		$conn = new connect();
+
         $array_data = [
             ":user" => $user,
             ":password" => $password
         ];
-        $query = $conn->query("SELECT * FROM clients where email = :user and password = :password", array($user, $password));
 
-		$query = $conn->query($sql);
+        $query = $conn->query("SELECT * FROM clients where email = :user and password = :password",
+            array($user, $password));
+
 		$result = $conn->fetch_array($query);
 
 		return $result;
@@ -254,16 +251,14 @@ class functions extends connect{
 
 		$conn = new connect();
 
-// 		return $email;
-
-		$query = $conn->query("SELECT * FROM clients where email = '".$email."'");
+		$query = $conn->query("SELECT * FROM clients where email = '".$email."'" );
 		$rsRow = $conn->row($query);
+
 
 		if($rsRow == 1){
 			$rs = $conn->fetch_array($query);
 			$id = $rs["id"];
-			$temporary_salt = $rs["temporary_salt"];
-			$chave = $email.$temporary_salt;
+			$chave = $email.$rs["password"];
 			$chave = hash('sha256',$chave);
 
 			if($token == $chave){

@@ -38,7 +38,8 @@ if($rsUser["senha"]){
 	$newPassword = 1;
 }
 
-$token = hash('sha256',$email);
+$token = $email.$password;
+$token = hash('sha256',$token);
 
 if($newPassword){
 

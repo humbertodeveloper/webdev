@@ -18,7 +18,7 @@ $rsToken = $functions->checkClientToken($token, $email);
 //echo $rsToken;
 
 if($rsToken){
-    $qryUpdate = "UPDATE clients SET password = '".$newPassword."' WHERE id = ".$rsToken;
+    $qryUpdate = "UPDATE clients SET password = '".$newPassword."', temporary_salt = '' WHERE id = ".$rsToken;
     $rsExec = $model->model_exec($qryUpdate);
     if ($rsExec){
         echo 1;

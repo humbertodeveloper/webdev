@@ -255,10 +255,11 @@ class functions extends connect{
 
 
 		if($rsRow == 1){
-			$rs = $conn->fetch_array($query);
-			$id = $rs["id"];
-			$chave = $email.$rs["password"];
-			$chave = hash('sha256',$chave);
+			$rs             = $conn->fetch_array($query);
+			$id             = $rs["id"];
+            $temporary_salt = $rs["temporary_salt"];
+			$chave          = $email.$temporary_salt;
+			$chave          = hash('sha256',$chave);
 
 			if($token == $chave){
 				return $id;

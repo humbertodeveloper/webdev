@@ -26,5 +26,5 @@ if($rsToken){
         echo "Impossível criar uma nova senha. Contate o Administrador.";
     }
 }else{
-    echo "Não foi possível reconhecer os dados informados.";
+    echo "Link expirado ou inválido.";
 }

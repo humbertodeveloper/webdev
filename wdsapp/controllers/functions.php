@@ -261,7 +261,7 @@ class functions extends connect{
 			$chave          = $email.$temporary_salt;
 			$chave          = hash('sha256',$chave);
 
-			if($token == $chave){
+			if($token == $chave && $temporary_salt > time()){
 				return $id;
 			}
 		}

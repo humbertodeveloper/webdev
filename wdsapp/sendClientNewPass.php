@@ -27,7 +27,7 @@ if(!$rsUser) {
 $email  = $rsUser["email"];
 $user = $rsUser["nome"];
 $id = $rsUser["id"];
-$salt = time();
+$salt = time() + 60;
 
 if($rsUser["password"]){
 	$password = $rsUser["password"];
